@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 import uvicorn
-from solders.keypair import Keypair
+from solders.keypair import Keypair # type: ignore
 
 import base58
 
@@ -26,7 +26,7 @@ def generate_wallet():
 def rug_check(public_key: str, private_key: str):
     keypair = Keypair.from_base58_string(private_key)  # type: ignore
     public_key = str(keypair.pubkey())
-    
+
     
     return {"message": "Rug check!", }
 
