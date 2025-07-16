@@ -1,0 +1,12 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "agentipy>=2.1.2.post5",
+    "base58>=2.1.1",
+    "fastapi[standard]>=0.116.1",
+    "solders>=0.21.0",
+]
