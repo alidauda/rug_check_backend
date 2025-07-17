@@ -250,6 +250,7 @@ dependencies = [
     { name = "agentipy" },
     { name = "base58" },
     { name = "fastapi", extra = ["standard"] },
+    { name = "requests" },
     { name = "solders" },
 ]
 
@@ -258,6 +259,7 @@ requires-dist = [
     { name = "agentipy", specifier = ">=2.1.2.post5" },
     { name = "base58", specifier = ">=2.1.1" },
     { name = "fastapi", extras = ["standard"], specifier = ">=0.116.1" },
+    { name = "requests", specifier = ">=2.31.0" },
     { name = "solders", specifier = ">=0.21.0" },
 ]
 
