@@ -18,6 +18,9 @@ from dotenv import load_dotenv
 app = FastAPI()
 
 load_dotenv()
+
+# Global API key - can be set via environment variable or use default
+RUGCHECK_API_KEY = os.getenv("RUGCHECK_API_KEY", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTI5MTcxMTksImlkIjoiOWM5NjFqSEJkOFhOVXpEMVlXYlhCRGhqV1BDNmY1SFpXZmtpOFRwNHhqNmsifQ.IuUffQdjtX_zsLpVjIHDxbFRE5u9Afk8yCeNnIfOVD8")
 @app.get("/")
 def read_root():
     return {"message": "Hello from backend!"}
@@ -36,7 +39,7 @@ def generate_wallet():
 @app.get("/rug_check")
 async def rug_check(input: str):
     try:
-        rugcheck = RugCheckManager(api_key="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTI5MTcxMTksImlkIjoiOWM5NjFqSEJkOFhOVXpEMVlXYlhCRGhqV1BDNmY1SFpXZmtpOFRwNHhqNmsifQ.IuUffQdjtX_zsLpVjIHDxbFRE5u9Afk8yCeNnIfOVD8")
+        rugcheck = RugCheckManager(api_key=RUGCHECK_API_KEY)
         report_task = rugcheck.fetch_token_report_summary(input)
         lockers_task = rugcheck.fetch_token_lp_lockers(input)
         report, lockers = await asyncio.gather(report_task, lockers_task)
@@ -47,7 +50,7 @@ async def rug_check(input: str):
 @app.get("/rug_check_scan")
 async def rug_check_scan(input: str, chain: str):
     try:
-        rugcheck = RugCheckManager(api_key="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTI5MTcxMTksImlkIjoiOWM5NjFqSEJkOFhOVXpEMVlXYlhCRGhqV1BDNmY1SFpXZmtpOFRwNHhqNmsifQ.IuUffQdjtX_zsLpVjIHDxbFRE5u9Afk8yCeNnIfOVD8")
+        rugcheck = RugCheckManager(api_key=RUGCHECK_API_KEY)
         report_task = rugcheck.fetch_token_report_summary(input)
         report = await report_task
         return {"report": report.to_user_friendly_string()}
